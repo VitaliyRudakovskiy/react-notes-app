@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 const AddNote = ({ handleAddNote }) => {
   const [noteText, setNoteText] = useState("");
+  const charactersLimit = 200;
 
   const handleChange = (event) => {
-    setNoteText(event.target.value);
+    if (charactersLimit - event.target.value.length >= 0)
+      setNoteText(event.target.value);
   };
 
   const handleSaveClick = () => {
@@ -24,7 +26,7 @@ const AddNote = ({ handleAddNote }) => {
         onChange={handleChange}
       />
       <div className='note-footer'>
-        <span>200 symbols remaining</span>
+        <span>{charactersLimit - noteText.length} symbols remaining</span>
         <button className='save-note' onClick={handleSaveClick}>
           Save
         </button>
